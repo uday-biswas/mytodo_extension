@@ -1,0 +1,6 @@
+mytodo_api/node_modules
+mytodo_api/dist
+mytodo_api/.env
+
+mytodo_extension/node_modules
+mytodo_extension/dist

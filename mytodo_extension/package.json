@@ -1,0 +1,115 @@
+{
+  "name": "DoneRight",
+  "displayName": "DoneRight",
+  "publisher": "UdayBiswas",
+  "icon": "media/todo_logo.png",
+  "description": "just another todo",
+  "version": "0.0.3",
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:mytodo.helloWorld",
+    "onCommand:mytodo.askQuestion",
+    "onCommand:mytodo.refresh",
+    "onCommand:mytodo.addTodo",
+    "onCommand:mytodo.authenticate",
+    "onView:mytodo-sidebar"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "mytodo-sidebar-view",
+          "title": "mytodo",
+          "icon": "media/checklist.svg"
+        }
+      ]
+    },
+    "views": {
+      "mytodo-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "mytodo-sidebar",
+          "name": "mytodo",
+          "icon": "media/checklist.svg",
+          "contextualTitle": "mytodo"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "mytodo.helloWorld",
+        "category": "mytodo",
+        "title": "Hello World"
+      },
+      {
+        "command": "mytodo.askQuestion",
+        "category": "mytodo",
+        "title": "Ask Question"
+      },
+      {
+        "command": "mytodo.refresh",
+        "category": "mytodo",
+        "title": "Refresh"
+      },
+      {
+        "command": "mytodo.addTodo",
+        "category": "mytodo",
+        "title": "Add Todo From Selection"
+      },
+      {
+        "command": "mytodo.authenticate",
+        "category": "mytodo",
+        "title": "Authenticate"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "concurrently \"rollup -c\" \"webpack\"",
+    "watch": "concurrently \"rollup -c -w\" \"webpack --watch\"",
+    "package": "concurrently \"rollup -c\" \"webpack\"",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "@rollup/plugin-typescript": "^8.1.0",
+    "@tsconfig/svelte": "^5.0.4",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.89.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "glob": "^10.4.1",
+    "mocha": "^10.4.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-svelte": "^6.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "svelte": "^4.2.17",
+    "svelte-check": "^3.7.1",
+    "svelte-preprocess": "^5.1.4",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "vscode-test": "^1.6.1",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "polka": "^0.5.2"
+  }
+}

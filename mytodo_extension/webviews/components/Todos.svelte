@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { User } from "../types";
+    import delete_icon from '../../media/icons8-delete-48.png';
 
     export let user: User;
     export let accessToken: string;
@@ -71,12 +72,32 @@ $: {
         text-decoration: line-through;
     }
     .delete-icon {
-        margin-left: 10px;
+        margin-left: 15px;
         cursor: pointer;
+    }
+    .delete-image {
+        width: 20px;
+        height: 20px;
+        margin-bottom: -5px;
+    }
+    .todo-text {
+        cursor: pointer;
+        width: 80%;
+    }
+    .todo{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px;
+    }
+    .intro {
+        font-size: 20px;
+        margin: 15px;
     }
 </style>
 
-<div>Hello: {user.name}</div>
+<div class="intro">Hello, {user.name}</div>
 
 <form
     on:submit|preventDefault={async () => {
@@ -88,9 +109,10 @@ $: {
 
 <!-- <ul> -->
     {#each todos as todo, index (todo._id)}
-    <div>
-        <span
+    <div class="todo">
+        <div
             class:complete={todo.completed}
+            class="todo-text"
             on:click={async () => {
                 todo.completed = !todo.completed;
                 const response = await fetch(`${apiBaseUrl}/todo`, {
@@ -106,8 +128,8 @@ $: {
                 console.log(await response.json());
             }}>
             {index + 1}. {todo.text}
-        </span>
-        <span class="delete-icon" on:click={() => deleteTodo(todo._id)}>🗑️</span>
+        </div>
+        <div class="delete-icon" on:click={() => deleteTodo(todo._id)}><img class="delete-image" src={delete_icon}/></div>
     </div>
     {/each}
 <!-- </ul> -->

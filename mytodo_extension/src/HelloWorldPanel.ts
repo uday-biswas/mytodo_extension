@@ -99,35 +99,7 @@ export class HelloWorldPanel {
     this._panel.webview.html = this._getHtmlForWebview(webview);
     webview.onDidReceiveMessage(async (data) => {
       switch (data.type) {
-        // case "report": {
-        //   const message = await vscode.window.showInputBox({
-        //     placeHolder: "why are you reporting this user?",
-        //   });
-        //   if (message) {
-        //     await mutationNoErr(`/report`, { message, ...data.value });
-        //     webview.postMessage({
-        //       command: "report-done",
-        //       data,
-        //     });
-        //     vscode.window.showInformationMessage("Thank you for reporting!");
-        //   }
-        //   break;
-        // }
-        // case "set-window-info": {
-        //   const { displayName, flair } = data.value;
-        //   this._panel.title = displayName;
-        //   if (flair in flairMap) {
-        //     const both = vscode.Uri.parse(
-        //       `https://flair.benawad.com/` +
-        //         flairMap[flair as keyof typeof flairMap]
-        //     );
-        //     this._panel.iconPath = {
-        //       light: both,
-        //       dark: both,
-        //     };
-        //   }
-        //   break;
-        // }
+        
         case "onInfo": {
           if (!data.value) {
             return;
@@ -142,11 +114,6 @@ export class HelloWorldPanel {
           vscode.window.showErrorMessage(data.value);
           break;
         }
-        // case "tokens": {
-        //   await Util.globalState.update(accessTokenKey, data.accessToken);
-        //   await Util.globalState.update(refreshTokenKey, data.refreshToken);
-        //   break;
-        // }
       }
     });
   }

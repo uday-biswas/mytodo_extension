@@ -12,8 +12,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:mytodo.helloWorld",
-    "onCommand:mytodo.askQuestion",
     "onCommand:mytodo.refresh",
     "onCommand:mytodo.addTodo",
     "onCommand:mytodo.authenticate",
@@ -42,16 +40,6 @@
       ]
     },
     "commands": [
-      {
-        "command": "mytodo.helloWorld",
-        "category": "mytodo",
-        "title": "Hello World"
-      },
-      {
-        "command": "mytodo.askQuestion",
-        "category": "mytodo",
-        "title": "Ask Question"
-      },
       {
         "command": "mytodo.refresh",
         "category": "mytodo",
@@ -82,6 +70,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^11.0.1",
     "@rollup/plugin-typescript": "^8.1.0",
     "@tsconfig/svelte": "^5.0.4",

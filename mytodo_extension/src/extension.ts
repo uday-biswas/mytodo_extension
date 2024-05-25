@@ -16,41 +16,24 @@ export function activate(context: vscode.ExtensionContext) {
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
 	context.subscriptions.push(
-		vscode.commands.registerCommand('mytodo.helloWorld', () => {
-			vscode.window.showInformationMessage(
-				"token value is : " , TokenManager.getToken()
-			);
-			console.log("token value is : " , TokenManager.getToken());
-			// HelloWorldPanel.createOrShow(context.extensionUri);
-		}));
-
-	context.subscriptions.push(
 		vscode.commands.registerCommand('mytodo.refresh', async () => {
-			HelloWorldPanel.kill();
-			HelloWorldPanel.createOrShow(context.extensionUri);
 
 			await vscode.commands.executeCommand("workbench.action.closeSidebar");
 			await vscode.commands.executeCommand(
 				"workbench.view.extension.mytodo-sidebar-view"
 			);
-			setTimeout(() => {
-				vscode.commands.executeCommand(
-					"workbench.action.webview.openDeveloperTools"
-				);
-			}, 500);
 		}));
-
+		
+		//adding a status bar item
+		const item = vscode.window.createStatusBarItem(
+			vscode.StatusBarAlignment.Right
+		);
+		item.text = "$(beaker) Add Todo";
+		item.command = "mytodo.addTodo";
+		
+		item.show();
+		
 	const sidebarProvider = new SidebarProvider(context.extensionUri);
-
-	//adding a status bar item
-	const item = vscode.window.createStatusBarItem(
-		vscode.StatusBarAlignment.Right
-	);
-	item.text = "$(beaker) Add Todo";
-	item.command = "mytodo.addTodo";
-
-	item.show();
-
 	context.subscriptions.push(
 		vscode.window.registerWebviewViewProvider("mytodo-sidebar", sidebarProvider)
 	);
@@ -77,6 +60,11 @@ export function activate(context: vscode.ExtensionContext) {
 	      const text = activeTextEditor.document.getText(
 	        activeTextEditor.selection
 	      );
+
+		  if(text === ""){
+			  vscode.window.showInformationMessage("No text selected");
+			  return;
+		  }
 
 	      sidebarProvider._view?.webview.postMessage({
 	        type: "new-todo",

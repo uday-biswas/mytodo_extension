@@ -4,7 +4,7 @@
   "publisher": "UdayBiswas",
   "icon": "media/todo_logo.png",
   "description": "just another todo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.89.0"
   },
@@ -23,7 +23,7 @@
       "activitybar": [
         {
           "id": "mytodo-sidebar-view",
-          "title": "mytodo",
+          "title": "DoneRight",
           "icon": "media/checklist.svg"
         }
       ]
@@ -42,17 +42,17 @@
     "commands": [
       {
         "command": "mytodo.refresh",
-        "category": "mytodo",
+        "category": "DoneRight",
         "title": "Refresh"
       },
       {
         "command": "mytodo.addTodo",
-        "category": "mytodo",
+        "category": "DoneRight",
         "title": "Add Todo From Selection"
       },
       {
         "command": "mytodo.authenticate",
-        "category": "mytodo",
+        "category": "DoneRight",
         "title": "Authenticate"
       }
     ]

@@ -82,6 +82,11 @@ const main = async () => {
       text: req.body.text,
       creatorId: req.userId,
     });
+    //adding the todo to the user
+    const user = await User.findOne({ _id: req.userId });
+    user.todos.push(todo._id);
+    await user.save();
+
     res.send({ todo });
   });
 
@@ -114,7 +119,12 @@ const main = async () => {
     if (!todo.creatorId.equals(userId)) {
       throw new Error("not authorized");
     }
-    await todo.remove();
+    // await todo.remove();
+    await Todo.findOneAndDelete({ _id: req.body.id });
+    const user = await User.findOne({ _id: req.userId });
+    user.todos = user.todos.filter((todoId: any) => !todoId.equals(todo._id));
+    await user.save();
+    
     res.send({ success: true, message: "Todo deleted" });
 });
 

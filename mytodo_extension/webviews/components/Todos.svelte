@@ -22,6 +22,7 @@
     }
 
     async function deleteTodo(id: number) {
+        console.log("deleting todo", id);
         await fetch(`${apiBaseUrl}/todo`, {
             method: "DELETE",
             body: JSON.stringify({
@@ -85,9 +86,10 @@ $: {
     <input bind:value={text} placeholder="Enter Todo and Press ENTER"/>
 </form>
 
-<!-- <ul>
-    {#each todos as todo (todo._id)}
-        <li
+<!-- <ul> -->
+    {#each todos as todo, index (todo._id)}
+    <div>
+        <span
             class:complete={todo.completed}
             on:click={async () => {
                 todo.completed = !todo.completed;
@@ -103,12 +105,14 @@ $: {
                 });
                 console.log(await response.json());
             }}>
-            {todo.text}
-        </li>
+            {index + 1}. {todo.text}
+        </span>
+        <span class="delete-icon" on:click={() => deleteTodo(todo._id)}>🗑️</span>
+    </div>
     {/each}
-</ul> -->
+<!-- </ul> -->
 
-<ul>
+<!-- <ul>
     {#each todos as todo, index (todo._id)}
         <li class:complete={todo.completed}>
             {index + 1}. {todo.text}
@@ -131,4 +135,4 @@ $: {
             </span>
         </li>
     {/each}
-</ul>
+</ul> -->
